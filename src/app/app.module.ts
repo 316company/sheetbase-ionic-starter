@@ -4,40 +4,29 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 
-import { IonicStorageModule } from '@ionic/storage';
-
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 
 import { NavProvider } from '../providers/nav/nav';
-import { SpreadsheetProvider } from '../providers/spreadsheet/spreadsheet';
-import { StorageProvider } from '../providers/storage/storage';
-import { CacheProvider } from '../providers/cache/cache';
 import { MetaProvider } from '../providers/meta/meta';
-import { ConnectionProvider } from '../providers/connection/connection';
-import { DataProvider } from '../providers/data/data';
+import { SpreadsheetProvider } from '../providers/spreadsheet/spreadsheet';
+import { SheetbaseProvider } from '../providers/sheetbase/sheetbase';
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage
+    MyApp
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp, {
+      // locationStrategy: 'path',
       backButtonText: '',
-      // locationStrategy: 'path'
-    }),
-    IonicStorageModule.forRoot({
-      name: 'thuviencodoc.net',
-      driverOrder: ['localstorage', 'indexeddb', 'websql']
+      pageTransition: 'wp-transition'
     })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage
+    MyApp
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -45,12 +34,9 @@ import { DataProvider } from '../providers/data/data';
     // {provide: APP_BASE_HREF, useValue: '/'},
 
     NavProvider,
-    SpreadsheetProvider,
-    StorageProvider,
-    CacheProvider,
     MetaProvider,
-    ConnectionProvider,
-    DataProvider
+    SpreadsheetProvider,
+    SheetbaseProvider
   ]
 })
 export class AppModule {}

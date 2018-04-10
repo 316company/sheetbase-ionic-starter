@@ -17,30 +17,27 @@ export class SpreadsheetProvider {
 
   }
 
-  getSheet(db: any, type: string = null): Promise<any> {
+  getSheet(
+    sheet: {id: string, range: string},
+    dataType: string = null,
+    keyField: string = null,
+    returnObject: boolean = true
+  ): Promise<any> {
     return new Promise((resolve, reject) => {
-      if(db.range.indexOf(',') < 0) {
-        this.get(db.id, db.range)
-        .then(value => this.ngZone.run(() => {
-          if(type) {
-            resolve(this.modifyValue(value, type));
-          } else {
-            resolve(value);
-          }
+      if(sheet.range.indexOf(',') < 0) {
+        this.get(sheet.id, sheet.range)
+        .then(value => this.ngZone.run(() => {          
+          resolve(this.modifyValue(value, dataType, keyField, returnObject));
         }))
         .catch(reject);
       } else {
         let rangeStr = '';
-        ((db.range.split(',')).map(x => {return x.trim()})||[]).forEach(range => {
+        ((sheet.range.split(',')).map(x => {return x.trim()})||[]).forEach(range => {
           rangeStr += '&ranges='+ range;
         });
-        this.batchGet(db.id, rangeStr)
+        this.batchGet(sheet.id, rangeStr)
         .then(value => this.ngZone.run(() => {
-          if(type) {
-            resolve(this.modifyValue(value, type));
-          } else {
-            resolve(value);
-          }
+          resolve(this.modifyValue(value, dataType, keyField, returnObject));
         }))
         .catch(reject);
       }
@@ -50,8 +47,8 @@ export class SpreadsheetProvider {
 
 
   /*
-  *
-  */
+  * get raw data
+  * */
   private get(id: string, range: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get<{values: any}>
@@ -76,38 +73,8 @@ export class SpreadsheetProvider {
 
 
   /*
-  *
-  */
-  private modifyValue(value: any, type: string): any {
-    let customModifier = CONFIG.modifiers[type] || function (value, tools: any = null) { return value; };
-
-    let items = {};
-    value.forEach(item => {
-
-      for(let key in item) {
-        // transform JSON where possible
-        try {
-          item[key] = JSON.parse(item[key]);
-        } catch(e) {}
-
-        // delete null key
-        if(item[key] === '' || item[key] === null || item[key] === undefined) {
-          delete item[key];
-        }
-      }
-
-      // custom modifier
-      item = customModifier(item);
-
-      // transform array to object
-      let $key = item.key; delete item.key;
-      items[$key] = item;
-    });
-    return items;
-  }
-  
-
-  
+  * cook raw data
+  * */
   private transformValue(value) {
     let items = [],
       headers = value[0] || [];
@@ -117,12 +84,6 @@ export class SpreadsheetProvider {
       for (let i = 0; i < rows.length; i++) {
         if(rows[i]) {
           let val: any = rows[i];
-          if(!isNaN(val) && Number(val) % 1 === 0) {
-            val = parseInt(val);
-          }
-          if(!isNaN(val) && Number(val) % 1 !== 0) {
-            val = parseFloat(val);
-          }
           item[headers[i]] = val;
         }
       }
@@ -154,6 +115,56 @@ export class SpreadsheetProvider {
     });
 
     return final;
+  }
+
+
+  /*
+  *
+  * */
+  private modifyValue(
+    value: any,
+    dataType: string,
+    keyField: string,
+    returnObject: boolean
+  ): any {
+    let customModifier = (item, tools: any = {}) => { return item };
+    if(dataType && CONFIG.modifiers && CONFIG.modifiers[dataType]) customModifier = CONFIG.modifiers[dataType]; 
+
+    let itemsObject = null;
+    let itemsArray = null;
+    (value||[]).forEach(item => {
+      
+      // basic modifier
+      for(let key in item) {
+        //transform JSON where possible
+        try {
+          item[key] = JSON.parse(item[key]);
+        } catch(e) {}
+
+        // transform number
+        if(!isNaN(item[key]) && Number(item[key]) % 1 === 0) item[key] = parseInt(item[key]);
+        if(!isNaN(item[key]) && Number(item[key]) % 1 !== 0) item[key] = parseFloat(item[key]);
+
+        // transform boolean value
+        if(typeof item[key] === 'string' || item[key] instanceof String) item[key] = ((item[key]).toLowerCase() === 'true') || ((item[key]).toLowerCase() === 'false' ? false : item[key]);
+
+        // delete null key
+        if(item[key] === '' || item[key] === null || item[key] === undefined) {
+          delete item[key];
+        }
+      }
+
+      // custom modifier
+      item = customModifier(item, {/* tools to help modify data */});
+
+      // transform array to object
+      itemsObject = itemsObject || {};
+      itemsObject[keyField ? item[keyField]: (item.key || item.slug || (''+ item.id))] = item;
+      itemsArray = itemsArray || [];
+      itemsArray.push(item);
+    });
+    
+    return returnObject ? itemsObject: itemsArray;
   }
 
 }

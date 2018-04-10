@@ -1,27 +1,35 @@
 export const CONFIG = {
 
     /*
-    *   Google API key
+    *   Authentication, using Google API key for public spreadsheet
     * 
     * */
     apiKey: '<api_key_here>',
 
     /*
-    *   Database address
+    *   Database address, a spreadsheet id
     *
     * */
     database: '<spreadsheet_id_here>',
+    
+    /*
+    *   Google script web app address, using as backend
+    *
+    * */
+    backend: '',
 
     /*
-    *   Database cache time, in hours
+    *   (optional) Custom modifiers, modify the data returned from spreadsheet
     * 
     * */
-    cacheTime: 24,
+    modifiers: {
 
-    /*
-    *   Custom modifiers
-    *   Modify the data returned from spreadsheet
-    * */
-    modifiers: {}
+        // for 'post' type data, same as table name
+        'posts': (item: any): any => {
+            item.greeting = 'Hello, ['+ (item.key || item.slug || item.id) +']! :)'; // add the field 'greeting' to every item has 'post' data
+            return item;
+        }
+
+    }
 
 }

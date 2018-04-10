@@ -37,5 +37,5 @@
     "@ionic/app-scripts": "3.1.8",
     "typescript": "~2.6.2"
   },
-  "description": "An Sheetbase + Ionic starter theme. See the docs at https://sheetbse.net/docs"
+  "description": "An Sheetbase + Ionic starter theme. See the docs at https://sheetbase.net/docs"
 }

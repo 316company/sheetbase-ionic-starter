@@ -1,22 +1,20 @@
 import { Component } from '@angular/core';
 
-import { HomePage } from '../pages/home/home';
-
-import { DataProvider } from '../providers/data/data';
+import { SheetbaseProvider } from '../providers/sheetbase/sheetbase';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
 
-  rootPage: any = HomePage;
+  rootPage: any = 'HomePage';
 
   constructor(
-    private data: DataProvider
+    private sheetbase: SheetbaseProvider
   ) {
 
     // get all the data from Spreadsheet
-    this.data.init();
+    this.sheetbase.init();
 
   }
 
