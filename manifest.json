@@ -4,7 +4,7 @@
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
-    "src": "/sheetbase-ionic-starter/assets/images/logo.png",
+    "src": "assets/images/logo.png",
     "sizes": "512x512",
     "type": "image/png"
   }],
