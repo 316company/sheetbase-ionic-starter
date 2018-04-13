@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 
-import { SheetbaseService as SheetbaseProvider } from '../../modules/sheetbase/services/sheetbase.service';
+import { SheetbaseService as SheetbaseProvider } from 'sheetbase-angular';
 
 import { NavProvider } from '../../providers/nav/nav';
 import { MetaProvider } from '../../providers/meta/meta';

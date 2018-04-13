@@ -10,7 +10,7 @@ export const CONFIG = {
     *   Database address, a spreadsheet id
     *
     * */
-    database: '<spreadsheet_id_here>',
+    database: '1BkCUWPCVWr90xfOTy5bDCDDbw3fD83XNBWCna3J98JY',
     
     /*
     *   Google script web app address, using as backend

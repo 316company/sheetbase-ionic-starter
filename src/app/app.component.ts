@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { SheetbaseService as SheetbaseProvider } from '../modules/sheetbase/services/sheetbase.service';
+import { SheetbaseService as SheetbaseProvider } from 'sheetbase-angular';
 
 @Component({
   templateUrl: 'app.html'

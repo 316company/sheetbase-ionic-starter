@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 
-import { SheetbaseModule } from '../modules/sheetbase/sheetbase.module'
+import { SheetbaseModule } from 'sheetbase-angular';
 
 import { MyApp } from './app.component';
 
