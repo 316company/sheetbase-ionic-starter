@@ -21,13 +21,13 @@
     <ion-grid>
       <ion-row>
         <ion-col col-12 col-md-10>
-          <button ion-button color="light" *ngFor="let item of sheetbase.dbTables()" (click)="itemsByTable(item.name)">
+          <button ion-button color="light" *ngFor="let item of sheetbase.db()?.tables" (click)="itemsByTable(item.name)">
             {{ item.name }}
             <ion-badge item-right *ngIf="item.autoload">AUTO</ion-badge>
           </button>
         </ion-col>
         <ion-col col-12 col-md-2>
-          <a ion-button color="dark" [href]="'https://docs.google.com/spreadsheets/d/'+ sheetbase.dbID() + '/edit'" target="_blank">Edit data</a>
+          <a ion-button color="dark" [href]="'https://docs.google.com/spreadsheets/d/'+ sheetbase.db()?.id + '/edit'" target="_blank">Edit data</a>
         </ion-col>
       </ion-row>
     </ion-grid>

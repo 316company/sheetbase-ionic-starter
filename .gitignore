@@ -34,6 +34,6 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 
-www/
 package-lock.json
 .editorconfig
+$demo/

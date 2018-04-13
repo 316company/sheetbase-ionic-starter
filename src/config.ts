@@ -23,13 +23,17 @@ export const CONFIG = {
     * 
     * */
     modifiers: {
-
-        // for 'post' type data, same as table name
-        'posts': (item: any): any => {
-            item.greeting = 'Hello, ['+ (item.key || item.slug || item.id) +']! :)'; // add the field 'greeting' to every item has 'post' data
-            return item;
-        }
-
+        'posts': posts
     }
 
+}
+
+
+
+/*
+*   Modifier functions
+* */
+export function posts(item: any): any {
+    item.greeting = 'Hello, ['+ (item.key || item.slug || item.id) +']! :)'; // add the field 'greeting' to every item has 'post' data
+    return item;
 }

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 
+import { SheetbaseService as SheetbaseProvider } from '../../modules/sheetbase/services/sheetbase.service';
+
 import { NavProvider } from '../../providers/nav/nav';
 import { MetaProvider } from '../../providers/meta/meta';
-import { SheetbaseProvider } from '../../providers/sheetbase/sheetbase';
 
 
 @IonicPage({
@@ -19,8 +20,9 @@ export class HomePage {
   items: any[];
 
   constructor(
-    private nav: NavProvider,
     private sheetbase: SheetbaseProvider,
+    
+    private nav: NavProvider,
     private meta: MetaProvider
   ) {
 
