@@ -36,4 +36,4 @@ UserInterfaceState.xcuserstate
 
 package-lock.json
 .editorconfig
-$demo/
+$dist/
