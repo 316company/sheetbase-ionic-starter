@@ -6,6 +6,7 @@ import { SheetbaseService as SheetbaseProvider } from 'sheetbase-angular';
 import { NavProvider } from '../../providers/nav/nav';
 import { MetaProvider } from '../../providers/meta/meta';
 
+import { SHEETBASE_CONFIG } from '../../configs/sheetbase.config';
 
 @IonicPage({
   segment: 'app'
@@ -16,8 +17,12 @@ import { MetaProvider } from '../../providers/meta/meta';
 })
 export class HomePage {
 
-  selectedTable: string;
+  tableName: string;
   items: any[];
+
+  databaseId: string;
+
+  tables: string[];
 
   constructor(
     private sheetbase: SheetbaseProvider,
@@ -25,7 +30,8 @@ export class HomePage {
     private nav: NavProvider,
     private meta: MetaProvider
   ) {
-
+    this.databaseId = SHEETBASE_CONFIG.database || '404';
+    this.tables = [];
   }
 
   ionViewDidLoad() {
@@ -34,15 +40,25 @@ export class HomePage {
     });
   }
 
-  itemsByTable(tableName: string) {
-    this.selectedTable = tableName;
+  ngOnInit() {
+    this.itemsByTable('posts');
+  }
+
+  itemsByTable(tableName: string = null) {
+    if(tableName) this.tableName = tableName;
+    if(!this.tableName) return;
 
     this.sheetbase.get(
-      tableName, null, {
+      this.tableName, null, {
       limitToFirst: 100
     }).subscribe(items => {
       this.items = items;
-    }); 
+
+      // record previous loaded tables
+      if(this.tables.indexOf(this.tableName) < 0) {
+        this.tables.push(this.tableName);
+      }
+    });
   }
 
   logItem(item) {

@@ -11,7 +11,7 @@ import { MyApp } from './app.component';
 import { NavProvider } from '../providers/nav/nav';
 import { MetaProvider } from '../providers/meta/meta';
 
-import { CONFIG } from '../config';
+import { SHEETBASE_CONFIG } from '../configs/sheetbase.config';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { CONFIG } from '../config';
       pageTransition: 'wp-transition'
     }),
 
-    SheetbaseModule.forRoot(CONFIG)
+    SheetbaseModule.forRoot(SHEETBASE_CONFIG)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

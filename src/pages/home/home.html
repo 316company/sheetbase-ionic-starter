@@ -15,22 +15,27 @@
   </section>
 
   <section>
-    <h1>Your data</h1>
+    <h1>See your data:</h1>
 
     <!-- tables -->
-    <ion-grid>
+    <ion-grid class="actions">
       <ion-row>
-        <ion-col col-12 col-md-10>
-          <button ion-button color="light" *ngFor="let item of sheetbase.db()?.tables" (click)="itemsByTable(item.name)">
-            {{ item.name }}
-            <ion-badge item-right *ngIf="item.autoload">AUTO</ion-badge>
-          </button>
+        <ion-col col-12 col-md-6>
+          <div class="load-data">
+            <input type="text" [(ngModel)]="tableName" placeholder="Table name: categories or posts, ...">
+            <button ion-button color="light" (click)="itemsByTable()">Load</button>
+          </div>
         </ion-col>
-        <ion-col col-12 col-md-2>
-          <a ion-button color="dark" [href]="'https://docs.google.com/spreadsheets/d/'+ sheetbase.db()?.id + '/edit'" target="_blank">Edit data</a>
+        <ion-col col-12 col-md-6>
+          <a ion-button color="dark" [href]="'https://docs.google.com/spreadsheets/d/'+ databaseId + '/edit'" target="_blank">Edit data</a>
         </ion-col>
       </ion-row>
     </ion-grid>
+
+    <div class="previous">
+      <button ion-button clear color="dark">Previous loaded:</button>
+      <button ion-button clear *ngFor="let item of tables" (click)="itemsByTable(item)">{{ item }}</button>
+    </div>
 
     <!-- Data list -->
     <table class="table table-bordered table-light">
@@ -44,7 +49,7 @@
 
       <tbody>
         <tr *ngIf="!items">
-          <td colspan="3">Click the table name to view the data.</td>
+          <td colspan="3">Enter the table name & click 'Load' to view the data.</td>
         </tr>
         <tr *ngIf="items && items.length < 1" style="text-align: center;">
           <td colspan="3"><ion-spinner></ion-spinner></td>

@@ -1,4 +1,4 @@
-export const CONFIG = {
+export const SHEETBASE_CONFIG = {
 
     /*
     *   Authentication, using Google API key for public spreadsheet

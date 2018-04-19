@@ -1,22 +1,58 @@
 page-home {
 
-    ion-grid {
-        padding: 0 !important;
-        
-        ion-col:first-child {
-            padding-left: 0;
-        }
-        ion-col:last-child {
-            text-align: right;
-            padding-right: 0;
+    ion-grid.actions {
+        padding: 0;
+
+        ion-col {
+            padding: 0;
+
+            &:last-child {
+                text-align: right;
+            }
         }
     }
 
-    button ion-badge {
-        display: inline-block;
-        margin-left: 15px;
-        font-size: .7em;
+    
+
+    .load-data {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        input, button {
+            display: block;
+        }
+
+        input {
+            width: 300px;
+            height: 38px;
+            border-radius: 5px;
+            border: 1px solid #DDD;
+            padding: 10px;
+            margin-right: 10px;
+        }
+    
+        button {
+            margin-top: 0;
+        }
     }
+
+
+    .previous {
+        padding: 15px 0;
+
+        button:first-child {
+            padding: 0;
+            margin-right: 15px;
+            cursor: default;
+
+            &:hover {
+                background: none;
+            }
+        }
+    }
+
 
     .table {
         margin: 30px 0 70px !important;
