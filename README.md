@@ -1,15 +1,19 @@
-# sheetbase-ionic-starter
+# Sheetbase Theme: Ionic Starter
 Starter theme for Sheetbase project based on Ionic.
 
-# Instruction
+## Getting start
 
-1. Clone this repo.
-2. Copy sample database from [here](https://docs.google.com/spreadsheets/d/1BkCUWPCVWr90xfOTy5bDCDDbw3fD83XNBWCna3J98JY/edit?usp=sharing).
-3. Get Google API Key, see [instruction](https://developers.google.com/maps/documentation/javascript/get-api-key).
-4. Edit the **src/config.ts** values.
-5. Make whatever you want.
+Install Sheetbase CLI
 
-# See more
+``$ npm install -g sheetbase-cli@latest``
 
-- Google Spreadsheet, [https://developers.google.com/sheets/api/](https://developers.google.com/sheets/api/).
-- Ionic Framework, [https://ionicframework.com/](https://ionicframework.com).
+Start a project
+
+``$ sheetbase start <project_name> -t ionic-starter``
+
+Done!
+
+Start building awesome website and app. Need help, see the docs: [https://sheetbase.net/docs](https://sheetbase.net/docs).
+
+## Support us
+[<img src="https://cloakandmeeple.files.wordpress.com/2017/06/become_a_patron_button3x.png?w=200">](https://www.patreon.com/lamnhan)

@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 
-import { SheetbaseService as SheetbaseProvider } from 'sheetbase-angular';
+import { DataService as DataProvider } from 'sheetbase-angular';
 
 import { NavProvider } from '../../providers/nav/nav';
 import { MetaProvider } from '../../providers/meta/meta';
 
-import { SHEETBASE_CONFIG } from '../../configs/sheetbase.config';
 
 @IonicPage({
   segment: 'app'
@@ -20,17 +19,14 @@ export class HomePage {
   tableName: string;
   items: any[];
 
-  databaseId: string;
-
   tables: string[];
 
   constructor(
-    private sheetbase: SheetbaseProvider,
+    private sheetbaseData: DataProvider,
     
     private nav: NavProvider,
     private meta: MetaProvider
   ) {
-    this.databaseId = SHEETBASE_CONFIG.database || '404';
     this.tables = [];
   }
 
@@ -41,23 +37,25 @@ export class HomePage {
   }
 
   ngOnInit() {
-    this.itemsByTable('posts');
+    this.itemsByTable('foo');
   }
 
   itemsByTable(tableName: string = null) {
     if(tableName) this.tableName = tableName;
     if(!this.tableName) return;
 
-    this.sheetbase.get(
+    this.sheetbaseData.get(
       this.tableName, null, {
       limitToFirst: 100
-    }).subscribe(items => {
+    }).then(items => {
       this.items = items;
 
       // record previous loaded tables
       if(this.tables.indexOf(this.tableName) < 0) {
         this.tables.push(this.tableName);
       }
+    }).catch(error => {
+      console.error(error);
     });
   }
 
