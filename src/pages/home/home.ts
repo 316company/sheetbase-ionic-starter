@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, AlertController } from 'ionic-angular';
 
 import { DataService as DataProvider } from 'sheetbase-angular';
 
@@ -22,6 +22,8 @@ export class HomePage {
   tables: string[];
 
   constructor(
+    private alertCtrl: AlertController,
+
     private sheetbaseData: DataProvider,
     
     private nav: NavProvider,
@@ -47,15 +49,27 @@ export class HomePage {
     this.sheetbaseData.get(
       this.tableName, null, {
       limitToFirst: 100
-    }).then(items => {
+    }).subscribe(items => {
       this.items = items;
 
       // record previous loaded tables
       if(this.tables.indexOf(this.tableName) < 0) {
         this.tables.push(this.tableName);
       }
-    }).catch(error => {
+    }, error => {
       console.error(error);
+      
+      let alert = this.alertCtrl.create({
+        title: 'Data',
+        message: `
+          Errors getting data for table name "<strong>${this.tableName}</strong>".
+          <ul>
+            <li>${error.meta.message}</li>
+          </ul>
+        `,
+        buttons: ['Ok']
+      });
+      alert.present();
     });
   }
 
