@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Sheetbase App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <section style="margin-bottom: 50px;">
+    <h1>Welcome!</h1>
+    <p>Welcome to Sheetbase, let's make something awesome! :D. If you get lost, the <a href="https://sheetbase.net/docs">docs</a> here to helps.</p>
+    <p><a href="https://sheetbase.net" target="_blank">Visit home page!</a></p>
+  </section>
+
+  <section>
+    <h1>See your data:</h1>
+
+    <!-- tables -->
+    <ion-grid class="actions">
+      <ion-row>
+        <ion-col col-12 col-md-6>
+          <div class="load-data">
+            <input type="text" [(ngModel)]="tableName" placeholder="Table name: categories or posts, ...">
+            <ion-button color="light" (click)="itemsByTable()">Load</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="previous">
+      <ion-button fill="clear" color="dark">Previous loaded:</ion-button>
+      <ion-button fill="clear" *ngFor="let item of tables" (click)="itemsByTable(item)">{{ item }}</ion-button>
+    </div>
+
+    <!-- Data list -->
+    <table class="table table-bordered table-light">
+      <thead>
+        <tr>
+          <th style="width: 10%;">#</th>
+          <th style="width: 60%;">Title</th>
+          <th style="width: 30%;">$Key</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngIf="!items">
+          <td colspan="3">Enter the table name & click 'Load' to view the data.</td>
+        </tr>
+        <tr *ngIf="items && items.length < 1" style="text-align: center;">
+          <td colspan="3"><ion-spinner></ion-spinner></td>
+        </tr>
+        <tr class="item" *ngFor="let item of items; let i = index" (click)="logItem(item)">
+          <td>{{ i+1 }}</td>
+          <td>{{ item.title || item.name }}</td>
+          <td>{{ item.$key }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p *ngIf="items && items.length > 0">Total: <strong>{{ items.length }}</strong> items</p>
+
+  </section>
+
+</ion-content>

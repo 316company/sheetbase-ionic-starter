@@ -1,44 +1,33 @@
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
-import { APP_BASE_HREF } from '@angular/common';
+import { RouterModule, RouteReuseStrategy, Routes } from '@angular/router';
+
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 import { SheetbaseModule } from 'sheetbase-angular';
-
-import { MyApp } from './app.component';
-
-import { NavProvider } from '../providers/nav/nav';
-import { MetaProvider } from '../providers/meta/meta';
-
 import { SHEETBASE_CONFIG } from '../configs/sheetbase.config';
 
 @NgModule({
-  declarations: [
-    MyApp
-  ],
+  declarations: [AppComponent],
+  entryComponents: [],
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp, {
-      // locationStrategy: 'path',
-      backButtonText: '',
-      pageTransition: 'wp-transition'
-    }),
-
+    AppRoutingModule,
+    IonicModule.forRoot(),
     SheetbaseModule.forRoot(SHEETBASE_CONFIG)
   ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp
-  ],
   providers: [
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-
-    // {provide: APP_BASE_HREF, useValue: '/'},
-
-    NavProvider,
-    MetaProvider
-  ]
+    StatusBar,
+    SplashScreen,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

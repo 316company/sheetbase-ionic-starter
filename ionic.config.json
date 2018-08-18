@@ -1,6 +1,7 @@
 {
-  "name": "sheetbase-starter",
-  "app_id": "",
-  "type": "ionic-angular",
-  "integrations": {}
+  "name": "sheetbase-ionic-starter",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
 }
