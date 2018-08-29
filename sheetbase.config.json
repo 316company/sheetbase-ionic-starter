@@ -1,0 +1,18 @@
+{
+    "name": "angular-starter",
+    "type": "angular",
+	"driveFolder": "1HbRI2diHynku0uAesOCQn-FE88SZ_6-x",
+	"configs": {
+		"frontend": {
+			"apiKey": "SUkepreTR52rAhustEju7haYak4ZUhax",
+			"backendUrl": "https://script.google.com/macros/s/AKfycbyON2n99mjFuvQBWMt5EmMgQ1KUQNVUkkHelPFo8A/exec"
+		},
+		"backend": {
+			"apiKey": "SUkepreTR52rAhustEju7haYak4ZUhax",
+			"databaseId": "1TncTY1KBVGxhMlTdV77T4m22RPSey9hLFtzlumcSDts",
+			"encryptionKey": "3raR?BrUg#dr",           
+			"contentFolder": "1BKTCtLPVBA0Og8G8Gc8hqm6ihCS71cKt"
+		}
+	},
+	"options": {}
+}
