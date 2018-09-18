@@ -1,6 +1,6 @@
-# Sheetbase Theme: Ionic Starter
+# Sheetbase Theme: Angular Starter
 
-Starter theme for Sheetbase project based on Ionic.
+Starter theme for Sheetbase project based on Angular + Ionic.
 
 ## Getting start
 

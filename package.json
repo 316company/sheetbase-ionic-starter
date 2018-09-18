@@ -29,14 +29,14 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular/cli": "~6.1.1",
-    "@angular/compiler": "~6.1.1",
-    "@angular/compiler-cli": "~6.1.1",
-    "@angular/language-service": "~6.1.1",
     "@angular-devkit/architect": "~0.7.2",
     "@angular-devkit/build-angular": "~0.7.2",
     "@angular-devkit/core": "~0.7.2",
     "@angular-devkit/schematics": "~0.7.2",
+    "@angular/cli": "^6.1.5",
+    "@angular/compiler": "~6.1.1",
+    "@angular/compiler-cli": "~6.1.1",
+    "@angular/language-service": "~6.1.1",
     "@ionic/ng-toolkit": "^1.0.0",
     "@ionic/schematics-angular": "^1.0.0",
     "@types/jasmine": "~2.8.6",
@@ -55,5 +55,5 @@
     "tslint": "~5.11.0",
     "typescript": "~2.7.2"
   },
-  "description": "An Sheetbase + Ionic theme. See more at https://sheetbase.net"
+  "description": "An Sheetbase theme, Angular + Ionic. See more at https://sheetbase.net"
 }
