@@ -1,3 +1,7 @@
+# ⛔️ DEPRECATED
+
+Please use [https://github.com/sheetbase-themes/blank-angular](https://github.com/sheetbase-themes/blank-angular) or [https://github.com/sheetbase-themes/basic-angular](https://github.com/sheetbase-themes/basic-angular) instead.
+
 # Sheetbase Theme: Angular Starter
 
 Starter theme for Sheetbase project based on Angular + Ionic.
